@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>GAME</title>
+    <title>GAME LEVEL 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('Quiz/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('Quiz/assets/css/owl.carousel.css') }}">
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('Quiz/assets/css/fontawesome-all.css') }}">
     <link rel="stylesheet" href="{{ asset('Quiz/assets/css/style.css') }}">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
     <div class="quiz-top-area text-center">
 
@@ -31,133 +32,152 @@
                     <li class="multisteps-form__progress-btn"></li>
                     <li class="multisteps-form__progress-btn"></li>
                     <li class="multisteps-form__progress-btn"></li>
+                    <li class="multisteps-form__progress-btn"></li>
                 </ul>
             </div>
             <div class="step-inner-content clearfix position-relative">
-                <form class="multisteps-form__form" action="thank-you.html" id="wizard" method="POST">
+                <form class="multisteps-form__form" id="wizard" method="POST" action="{{ route('postL1') }}">
+                    @csrf
+                    {{-- pertanyaan id --}}
+                    <input type="hidden" name="q-1-id" value="{{ $pertanyaans[0]->id }}">
+                    <input type="hidden" name="q-2-id" value="{{ $pertanyaans[1]->id }}">
+                    <input type="hidden" name="q-3-id" value="{{ $pertanyaans[2]->id }}">
+                    <input type="hidden" name="q-4-id" value="{{ $pertanyaans[3]->id }}">
+                    <input type="hidden" name="q-5-id" value="{{ $pertanyaans[4]->id }}">
+
                     <div class="form-area position-relative">
-                        <div class="multisteps-form__panel  js-active" data-animation="fadeIn">
-                            <div class="wizard-forms clearfix position-relative">
+                        {{-- STEP 1 --}}
+                        <div class="multisteps-form__panel  js-active" data-animation="fadeIn" id="step-1">
+                            <div class="wizard-forms clearfix position-relative" id="steps">
                                 <div class="quiz-title text-center">
-                                    <span>Permainan 1 (Level 1)</span>
-                                    <div >
-                                        <img src="{{ URL::to('/') }}/img/{{ $pertanyaan[0]->path_image }}"
-                                        width="20%">
+                                    <span>Game 1</span>
+                                    <div>
+                                        <img src="{{ URL::to('/') }}/img/{{ $pertanyaans[0]->path_image }}"
+                                            width="20%">
                                     </div>
-                                    <p>{{ $pertanyaan[0]->pertanyaan }}</p>
+                                    <p>{{ $pertanyaans[0]->pertanyaan }}</p>
                                 </div>
                                 <div class="quiz-option-selector clearfix">
                                     <ul>
                                         <li>
                                             <label class="start-quiz-item">
-                                                <input type="radio" name="quiz" value="Email Markering"
+                                                <input type="radio" name="p1"
+                                                    value="{{ $pertanyaans[0]->opsi[0]->opsi1 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">A</span>
-                                                <span class="exp-label">ss
+                                                <span class="exp-label">{{ $pertanyaans[0]->opsi[0]->opsi1 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="Font Developer"
+                                                <input type="radio" name="p1"
+                                                    value="{{ $pertanyaans[0]->opsi[0]->opsi2 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">b</span>
-                                                <span class="exp-label">GA</span>
+                                                <span class="exp-label">{{ $pertanyaans[0]->opsi[0]->opsi2 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="Digital Marketing"
+                                                <input type="radio" name="p1"
+                                                    value="{{ $pertanyaans[0]->opsi[0]->opsi3 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">c</span>
-                                                <span class="exp-label">NGA</span>
+                                                <span class="exp-label">{{ $pertanyaans[0]->opsi[0]->opsi3 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="SEO"
+                                                <input type="radio" name="p1"
+                                                    value="{{ $pertanyaans[0]->opsi[0]->opsi4 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">d</span>
-                                                <span class="exp-label">NGKA </span>
+                                                <span class="exp-label">{{ $pertanyaans[0]->opsi[0]->opsi4 }} </span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="bottom-vector">
-                                    <img src="{{ asset('Quiz/assets/img/bq1.png') }}" alt="">
+                                    <img src="{{ asset('Quiz/assets/img/bq2.png') }}" alt="">
                                 </div>
                                 <div class="quiz-progress-area">
                                     <div class="progress">
                                         <div class="progress-bar position-relative" style="width: 20%">
-                                            <span>24% complete, keep it up!</span>
+                                            <span>20% complete, keep it up!</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="actions clearfix">
                                     <ul>
-                                        <li class="d-none"><span class="js-btn-next" title="PREV">Permainan
-                                                Sebelumnya</span></li>
-                                        <li><span class="js-btn-next" title="NEXT">Permainan Selanjutnya</span>
+                                        <li class="d-none"><span class="js-btn-next" title="PREV">Kembali</span></li>
+                                        <li><span class="js-btn-next" title="NEXT" id="btnNext1">Lanjutkan</span>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="multisteps-form__panel " data-animation="fadeIn">
+                        {{-- STEP 2 --}}
+                        <div class="multisteps-form__panel" data-animation="fadeIn" id="step-2">
                             <div class="wizard-forms clearfix position-relative">
                                 <div class="quiz-title text-center">
-                                    <span>Permainan 1 (Level 1)</span>
-                                    <div >
-                                        <img src="{{ URL::to('/') }}/img/{{ $pertanyaan[1]->path_image }}"
-                                        width="20%">
+                                    <span>Game 2</span>
+                                    <div>
+                                        <img src="{{ URL::to('/') }}/img/{{ $pertanyaans[1]->path_image }}"
+                                            width="20%">
                                     </div>
-                                    <p>{{ $pertanyaan[1]->pertanyaan }}</p>
+                                    <p>{{ $pertanyaans[1]->pertanyaan }}</p>
                                 </div>
-                                <div class="quiz-option-selector clearfix">
+                                <div class="quiz-option-selector clearfix" id="stepss">
                                     <ul>
                                         <li>
                                             <label class="start-quiz-item">
-                                                <input type="radio" name="quiz" value="Email Markering"
+                                                <input type="radio" name="p2"
+                                                    value="{{ $pertanyaans[1]->opsi[0]->opsi1 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">A</span>
-                                                <span class="exp-label">ss
+                                                <span class="exp-label">{{ $pertanyaans[1]->opsi[0]->opsi1 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="Font Developer"
+                                                <input type="radio" name="p2"
+                                                    value="{{ $pertanyaans[1]->opsi[0]->opsi2 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">b</span>
-                                                <span class="exp-label">GA</span>
+                                                <span class="exp-label">{{ $pertanyaans[1]->opsi[0]->opsi2 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="Digital Marketing"
+                                                <input type="radio" name="p2"
+                                                    value="{{ $pertanyaans[1]->opsi[0]->opsi3 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">c</span>
-                                                <span class="exp-label">NGA</span>
+                                                <span class="exp-label">{{ $pertanyaans[1]->opsi[0]->opsi3 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="SEO"
+                                                <input type="radio" name="p2"
+                                                    value="{{ $pertanyaans[1]->opsi[0]->opsi4 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">d</span>
-                                                <span class="exp-label">NGKA </span>
+                                                <span class="exp-label">{{ $pertanyaans[1]->opsi[0]->opsi4 }}
+                                                </span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="bottom-vector">
-                                    <img src="{{ asset('Quiz/assets/img/bq1.png') }}" alt="">
+                                    <img src="{{ asset('Quiz/assets/img/bq2.png') }}" alt="">
                                 </div>
                                 <div class="quiz-progress-area">
                                     <div class="progress">
@@ -168,216 +188,71 @@
                                 </div>
                                 <div class="actions clearfix">
                                     <ul>
-                                        <li class="d-none"><span class="js-btn-next" title="PREV">Permainan
-                                                Sebelumnya</span></li>
-                                        <li><span class="js-btn-next" title="NEXT">Permainan Selanjutnya</span>
+                                        <li><span class="js-btn-prev" title="PREV">Kembali</span></li>
+                                        <li><span class="js-btn-next" title="NEXT" id="btnNext2">Lanjutkan</span>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="multisteps-form__panel " data-animation="fadeIn">
+                        {{-- STEP 3 --}}
+                        <div class="multisteps-form__panel" data-animation="fadeIn" id="step-3">
                             <div class="wizard-forms clearfix position-relative">
                                 <div class="quiz-title text-center">
-                                    <span>Permainan 1 (Level 1)</span>
-                                    <div >
-                                        <img src="{{ URL::to('/') }}/img/{{ $pertanyaan[2]->path_image }}"
-                                        width="20%">
+                                    <span>Game 3</span>
+                                    <div>
+                                        <img src="{{ URL::to('/') }}/img/{{ $pertanyaans[2]->path_image }}"
+                                            width="20%">
                                     </div>
-                                    <p>{{ $pertanyaan[2]->pertanyaan }}</p>
+                                    <p>{{ $pertanyaans[2]->pertanyaan }}</p>
                                 </div>
-                                <div class="quiz-option-selector clearfix">
+                                <div class="quiz-option-selector clearfix" id="stepss">
                                     <ul>
                                         <li>
                                             <label class="start-quiz-item">
-                                                <input type="radio" name="quiz" value="Email Markering"
+                                                <input type="radio" name="p3"
+                                                    value="{{ $pertanyaans[2]->opsi[0]->opsi1 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">A</span>
-                                                <span class="exp-label">ss
+                                                <span class="exp-label">{{ $pertanyaans[2]->opsi[0]->opsi1 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="Font Developer"
+                                                <input type="radio" name="p3"
+                                                    value="{{ $pertanyaans[2]->opsi[0]->opsi2 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">b</span>
-                                                <span class="exp-label">GA</span>
+                                                <span class="exp-label">{{ $pertanyaans[2]->opsi[0]->opsi2 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="Digital Marketing"
+                                                <input type="radio" name="p3"
+                                                    value="{{ $pertanyaans[2]->opsi[0]->opsi3 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">c</span>
-                                                <span class="exp-label">NGA</span>
+                                                <span class="exp-label">{{ $pertanyaans[2]->opsi[0]->opsi3 }}</span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="radio" name="quiz" value="SEO"
+                                                <input type="radio" name="p3"
+                                                    value="{{ $pertanyaans[2]->opsi[0]->opsi4 }}"
                                                     class="exp-option-box">
                                                 <span class="exp-number text-uppercase">d</span>
-                                                <span class="exp-label">NGKA </span>
+                                                <span class="exp-label">{{ $pertanyaans[2]->opsi[0]->opsi4 }}
+                                                </span>
                                                 <span class="checkmark-border"></span>
                                             </label>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="bottom-vector">
-                                    <img src="{{ asset('Quiz/assets/img/bq1.png') }}" alt="">
-                                </div>
-                                <div class="quiz-progress-area">
-                                    <div class="progress">
-                                        <div class="progress-bar position-relative" style="width: 60%">
-                                            <span>40% complete, keep it up!</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="actions clearfix">
-                                    <ul>
-                                        <li class="d-none"><span class="js-btn-next" title="PREV">Permainan
-                                                Sebelumnya</span></li>
-                                        <li><span class="js-btn-next" title="NEXT">Permainan Selanjutnya</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        <!-- step 1 -->
-                        {{-- <div class="multisteps-form__panel" data-animation="fadeIn">
-                            <div class="wizard-forms clearfix position-relative">
-                                <div class="quiz-title text-center">
-                                    <span>Question 2</span>
-                                    <h2>Thankyou! Tell us what you do ?</h2>
-                                </div>
-                                <div class="quiz-option-selector quiz-option-selector-2 clearfix">
-                                    <ul>
-                                        <li>
-                                            <label class="start-quiz-item">
-                                                <input type="radio" name="quiz" value="Email Markering"
-                                                    class="exp-option-box">
-                                                <span class="exp-number text-uppercase"><img
-                                                        src="{{ asset('Quiz/assets/img/qi1.png') }}"
-                                                        alt=""></span>
-                                                <span class="exp-label">Audo Services</span>
-                                                <span class="checkmark-border"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="quiz" value="Font Developer"
-                                                    class="exp-option-box">
-                                                <span class="exp-number text-uppercase"><img
-                                                        src="{{ asset('Quiz/assets/img/qi2.png') }}"
-                                                        alt=""></span>
-                                                <span class="exp-label">Entertainment</span>
-                                                <span class="checkmark-border"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="quiz" value="Digital Marketing"
-                                                    class="exp-option-box">
-                                                <span class="exp-number text-uppercase"><img
-                                                        src="{{ asset('Quiz/assets/img/qi3.png') }}"
-                                                        alt=""></span>
-                                                <span class="exp-label">Household Services</span>
-                                                <span class="checkmark-border"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="quiz" value="SEO"
-                                                    class="exp-option-box">
-                                                <span class="exp-number text-uppercase"><img
-                                                        src="{{ asset('Quiz/assets/img/qi4.png') }}"
-                                                        alt=""></span>
-                                                <span class="exp-label">Medicine and Health </span>
-                                                <span class="checkmark-border"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="quiz" value="SEO"
-                                                    class="exp-option-box">
-                                                <span class="exp-number text-uppercase"><img
-                                                        src="{{ asset('Quiz/assets/img/qi7.png') }}"
-                                                        alt=""></span>
-                                                <span class="exp-label">Rent and lease </span>
-                                                <span class="checkmark-border"></span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="radio" name="quiz" value="SEO"
-                                                    class="exp-option-box">
-                                                <span class="exp-number text-uppercase"><img
-                                                        src="{{ asset('Quiz/assets/img/qi6.png') }}"
-                                                        alt=""></span>
-                                                <span class="exp-label">Construction and repair </span>
-                                                <span class="checkmark-border"></span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="bottom-vector">
-                                    <img src="{{ asset('Quiz/assets/img/bq1.png') }}" alt="">
-                                </div>
-                                <div class="quiz-progress-area">
-                                    <div class="progress">
-                                        <div class="progress-bar position-relative" style="width: 40%">
-                                            <span>40% complete, keep it up!</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="actions clearfix">
-                                    <ul>
-                                        <li><span class="js-btn-prev" title="PREV">Previous Question</span></li>
-                                        <li><span class="js-btn-next" title="NEXT">Next Question</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- step 2 -->
-                        <div class="multisteps-form__panel" data-animation="fadeIn">
-                            <div class="wizard-forms">
-                                <div class="quiz-title text-center">
-                                    <span>Question 3</span>
-                                    <h2>Start Quiz</h2>
-                                </div>
-                                <div class="quiz-option-selector">
-                                    <label class="quiz-details-option position-relative">
-                                        <input type="radio" name="quiz" value="Email Markering"
-                                            class="exp-option-box">
-                                        <span class="select-area"></span>
-                                        <span>User interface design.One Awesome Flat Ui Kit in Psd format. The pack ...
-                                            Quiz App is a mobile UI kit created using Sketch and Photoshop, aimed to
-                                            help you kick start your next mobile quiz or trivia project</span>
-                                    </label>
-                                    <label class="quiz-details-option position-relative">
-                                        <input type="radio" name="quiz" value="Email Markering"
-                                            class="exp-option-box">
-                                        <span class="select-area"></span>
-                                        <span>User interface design.One Awesome Flat Ui Kit in Psd format. The pack ...
-                                            Quiz App is a mobile UI kit created using Sketch and Photoshop, aimed to
-                                            help you kick start your next mobile quiz or trivia project</span>
-                                    </label>
-                                    <label class="quiz-details-option position-relative">
-                                        <input type="radio" name="quiz" value="Email Markering"
-                                            class="exp-option-box">
-                                        <span class="select-area"></span>
-                                        <span>User interface design.One Awesome Flat Ui Kit in Psd format. The pack ...
-                                            Quiz App is a mobile UI kit created using Sketch and Photoshop, aimed to
-                                            help you kick start your next mobile quiz or trivia project</span>
-                                    </label>
-                                </div>
-                                <div class="bottom-vector">
-                                    <img src="{{ asset('Quiz/assets/img/bq1.png') }}" alt="">
+                                    <img src="{{ asset('Quiz/assets/img/bq2.png') }}" alt="">
                                 </div>
                                 <div class="quiz-progress-area">
                                     <div class="progress">
@@ -388,64 +263,71 @@
                                 </div>
                                 <div class="actions clearfix">
                                     <ul>
-                                        <li><span class="js-btn-prev" title="PREV">Previous Question</span></li>
-                                        <li><span class="js-btn-next" title="NEXT">Next Question</span></li>
+                                        <li><span class="js-btn-prev" title="PREV">Kembali</span></li>
+                                        <li><span class="js-btn-next" title="NEXT" id="btnNext3">Lanjutkan</span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div> --}}
-                        <!-- step 3 -->
-                        <div class="multisteps-form__panel" data-animation="fadeIn">
-                            <div class="wizard-forms">
+                        </div>
+                        {{-- STEP 4 --}}
+                        <div class="multisteps-form__panel" data-animation="fadeIn" id="step-4">
+                            <div class="wizard-forms clearfix position-relative">
                                 <div class="quiz-title text-center">
-                                    <span>Question 4</span>
-                                    <h2>Start Quiz</h2>
-                                    <p>User interface design.One Awesome Flat Ui Kit in Psd format. The pack ... Quiz
-                                        App is a mobile UI kit created using Sketch and Photoshop, aimed to help you
-                                        kick start your next mobile quiz or trivia project</p>
-                                </div>
-                                <div class="quiz-option-selector">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="quiz-option-area position-relative">
-                                                <input type="radio" name="quiz" value="SEO"
-                                                    class="exp-option-box">
-                                                <span class="quiz-option-img">
-                                                    <img src="{{ asset('Quiz/assets/img/qo1.png') }}" alt="">
-                                                </span>
-                                                <span class="quiz-option-serial text-center">1</span>
-                                                <span class="quiz-option-text">User interface design.One
-                                                    Awesome Flat Ui Kit in Psd format.</span>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="quiz-option-area position-relative">
-                                                <input type="radio" name="quiz" value="SEO"
-                                                    class="exp-option-box">
-                                                <span class="quiz-option-img">
-                                                    <img src="{{ asset('Quiz/assets/img/qo3.png') }}" alt="">
-                                                </span>
-                                                <span class="quiz-option-serial text-center">2</span>
-                                                <span class="quiz-option-text">User interface design.One
-                                                    Awesome Flat Ui Kit in Psd format.</span>
-                                            </label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="quiz-option-area position-relative">
-                                                <input type="radio" name="quiz" value="SEO"
-                                                    class="exp-option-box">
-                                                <span class="quiz-option-img">
-                                                    <img src="{{ asset('Quiz/assets/img/qo2.png') }}" alt="">
-                                                </span>
-                                                <span class="quiz-option-serial text-center">3</span>
-                                                <span class="quiz-option-text">User interface design.One
-                                                    Awesome Flat Ui Kit in Psd format.</span>
-                                            </label>
-                                        </div>
+                                    <span>Game 4</span>
+                                    <div>
+                                        <img src="{{ URL::to('/') }}/img/{{ $pertanyaans[3]->path_image }}"
+                                            width="20%">
                                     </div>
+                                    <p>{{ $pertanyaans[3]->pertanyaan }}</p>
+                                </div>
+                                <div class="quiz-option-selector clearfix" id="stepss">
+                                    <ul>
+                                        <li>
+                                            <label class="start-quiz-item">
+                                                <input type="radio" name="p4"
+                                                    value="{{ $pertanyaans[3]->opsi[0]->opsi1 }}"
+                                                    class="exp-option-box">
+                                                <span class="exp-number text-uppercase">A</span>
+                                                <span class="exp-label">{{ $pertanyaans[3]->opsi[0]->opsi1 }}</span>
+                                                <span class="checkmark-border"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="radio" name="p4"
+                                                    value="{{ $pertanyaans[3]->opsi[0]->opsi2 }}"
+                                                    class="exp-option-box">
+                                                <span class="exp-number text-uppercase">b</span>
+                                                <span class="exp-label">{{ $pertanyaans[3]->opsi[0]->opsi2 }}</span>
+                                                <span class="checkmark-border"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="radio" name="p4"
+                                                    value="{{ $pertanyaans[3]->opsi[0]->opsi3 }}"
+                                                    class="exp-option-box">
+                                                <span class="exp-number text-uppercase">c</span>
+                                                <span class="exp-label">{{ $pertanyaans[3]->opsi[0]->opsi3 }}</span>
+                                                <span class="checkmark-border"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="radio" name="p4"
+                                                    value="{{ $pertanyaans[3]->opsi[0]->opsi4 }}"
+                                                    class="exp-option-box">
+                                                <span class="exp-number text-uppercase">d</span>
+                                                <span class="exp-label">{{ $pertanyaans[3]->opsi[0]->opsi4 }}
+                                                </span>
+                                                <span class="checkmark-border"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="bottom-vector">
-                                    <img src="{{ asset('Quiz/assets/img/bq1.png') }}" alt="">
+                                    <img src="{{ asset('Quiz/assets/img/bq2.png') }}" alt="">
                                 </div>
                                 <div class="quiz-progress-area">
                                     <div class="progress">
@@ -456,8 +338,84 @@
                                 </div>
                                 <div class="actions clearfix">
                                     <ul>
-                                        <li><span class="js-btn-prev" title="PREV">Previous Question</span></li>
-                                        <li><button class="js-btn-submit" type="submit"><span>SUBMIT</span></button>
+                                        <li><span class="js-btn-prev" title="PREV">Kembali</span></li>
+                                        <li><span class="js-btn-next" title="NEXT" id="btnNext4">Lanjutkan</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- STEP 5 --}}
+                        <div class="multisteps-form__panel" data-animation="fadeIn" id="step-4">
+                            <div class="wizard-forms clearfix position-relative">
+                                <div class="quiz-title text-center">
+                                    <span>Game 4</span>
+                                    <div>
+                                        <img src="{{ URL::to('/') }}/img/{{ $pertanyaans[4]->path_image }}"
+                                            width="20%">
+                                    </div>
+                                    <p>{{ $pertanyaans[4]->pertanyaan }}</p>
+                                </div>
+                                <div class="quiz-option-selector clearfix" id="stepss">
+                                    <ul>
+                                        <li>
+                                            <label class="start-quiz-item">
+                                                <input type="radio" name="p5"
+                                                    value="{{ $pertanyaans[4]->opsi[0]->opsi1 }}"
+                                                    class="exp-option-box">
+                                                <span class="exp-number text-uppercase">A</span>
+                                                <span class="exp-label">{{ $pertanyaans[4]->opsi[0]->opsi1 }}</span>
+                                                <span class="checkmark-border"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="radio" name="p5"
+                                                    value="{{ $pertanyaans[4]->opsi[0]->opsi2 }}"
+                                                    class="exp-option-box">
+                                                <span class="exp-number text-uppercase">b</span>
+                                                <span class="exp-label">{{ $pertanyaans[4]->opsi[0]->opsi2 }}</span>
+                                                <span class="checkmark-border"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="radio" name="p5"
+                                                    value="{{ $pertanyaans[4]->opsi[0]->opsi3 }}"
+                                                    class="exp-option-box">
+                                                <span class="exp-number text-uppercase">c</span>
+                                                <span class="exp-label">{{ $pertanyaans[4]->opsi[0]->opsi3 }}</span>
+                                                <span class="checkmark-border"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="radio" name="p5"
+                                                    value="{{ $pertanyaans[4]->opsi[0]->opsi4 }}"
+                                                    class="exp-option-box">
+                                                <span class="exp-number text-uppercase">d</span>
+                                                <span class="exp-label">{{ $pertanyaans[4]->opsi[0]->opsi4 }}
+                                                </span>
+                                                <span class="checkmark-border"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="bottom-vector">
+                                    <img src="{{ asset('Quiz/assets/img/bq2.png') }}" alt="">
+                                </div>
+                                <div class="quiz-progress-area">
+                                    <div class="progress">
+                                        <div class="progress-bar position-relative" style="width: 100%">
+                                            <span>100% complete, keep it up!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="actions clearfix">
+                                    <ul>
+                                        <li><span class="js-btn-prev" title="PREV">Kembali</span></li>
+                                        <li><span class="js-btn-next" title="NEXT" id="btnSubmit"><button
+                                                    type="submit">Submit</button></span>
                                         </li>
                                     </ul>
                                 </div>
@@ -481,25 +439,61 @@
     <script src="{{ asset('Quiz/assets/js/switch.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
-            // var count = 60;
-            // var counter = setInterval(timer, 1000);
-
-            // function timer() {
-            //     count = count - 1;
-            //     if (count == -1) {
-            //         clearInterval(counter);
-            //         return;
-            //     }
-
-            //     var seconds = count % 60;
-            //     var minutes = Math.floor(count / 60);
-            //     var hours = Math.floor(minutes / 60);
-            //     minutes %= 60;
-            //     hours %= 60;
-            //     $("#countdown").html(hours + ":" + minutes + ":" + seconds);
-            // }
+$(document).ready(function () {
+        //required stepss on btnNext
+        $('#btnNext1').click(function () {
+            console.log($('input[name="p1"]:checked').length);
+            if ($('input[name="p1"]:checked').length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please select an option!',
+                })
+                return false;
+            }
+            
         });
+        $('#btnNext2').click(function () {
+            console.log($('input[name="p2"]:checked').length);
+            if ($('input[name="p2"]:checked').length === 0) {
+                alert('Please select an option!');
+                return false;
+            }
+            
+        });
+        $('#btnNext3').click(function () {
+            console.log($('input[name="p3"]:checked').length);
+            if ($('input[name="p3"]:checked').length === 0) {
+                alert('Please select an option!');
+                return false;
+            }
+            
+        });
+        $('#btnNext4').click(function () {
+            console.log($('input[name="p4"]:checked').length);
+            if ($('input[name="p4"]:checked').length === 0) {
+                alert('Please select an option!');
+                return false;
+            }
+            
+        });
+        $('#btnSubmit').click(function () {
+            console.log($('input[name="p5"]:checked').length);
+            if ($('input[name="p5"]:checked').length === 0) {
+                alert('Please select an option!');
+                return false;
+            }
+            
+        });
+
+
+
+
+    });
+
+
+
+
     </script>
 </body>
 

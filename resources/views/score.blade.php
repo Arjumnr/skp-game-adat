@@ -27,7 +27,7 @@
                         <div class="wizard-forms clearfix position-relative">
                             <div class="quiz-title text-center">
                                 <strong>
-                                    <h1 class="fs-1">100</h1>
+                                    <h1 class="fs-1">{{ $score }}</h1>
                                 </strong>
 
                                 <div class="bottom-vector">
@@ -40,8 +40,8 @@
                             <div class="actions clearfix">
                                 <ul>
 
-                                    <a href="{{ route('optionMulai') }}"> <button type="button">
-                                            <li><span class="js-btn-next" title="NEXT">Kembali Ke Home</span></li>
+                                    <a href="{{ route('level') }}"> <button type="button">
+                                            <li><span class="js-btn-next" title="NEXT">Kembali Ke Beranda</span></li>
                                         </button></a>
                                 </ul>
                             </div>

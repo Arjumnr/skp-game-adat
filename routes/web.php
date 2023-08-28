@@ -29,6 +29,9 @@ Route::group(['middleware' => ['usernameCek']], function () {
     Route::get('/level1', [IndexController::class, 'level1'])->name('level1');
     Route::get('/level2', [IndexController::class, 'level2'])->name('level2');
     Route::get('/level3', [IndexController::class, 'level3'])->name('level3');
+    Route::post('/level1/postL1', [IndexController::class, 'postL1'])->name('postL1');
+    Route::post('/level2/postL2', [IndexController::class, 'postL2'])->name('postL2');
+    Route::post('/level3/postL3', [IndexController::class, 'postL3'])->name('postL3');
     Route::get('/back', [IndexController::class, 'back'])->name('back');
     Route::get('/exit', [IndexController::class, 'exit'])->name('exit');
     Route::get('/score', [IndexController::class, 'score'])->name('score');

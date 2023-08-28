@@ -47,54 +47,162 @@ class IndexController extends Controller
 
     public function level1(Request $request)
     {
-        //kirim 5 pertanyaan random
-        $jumlahPertanyaan = Pertanyaan::all()->count();
 
-        $opsi = Opsi::all();
-        $pertanyaan = Pertanyaan::inRandomOrder()->limit($jumlahPertanyaan)->get();
+            //pertanyaan with opsi()
+            $pertanyaans = Pertanyaan::with('opsi')->where('level', 1)->get()->random(5);
 
-            foreach ($opsi as $key => $value) {
-                if ($value->jawaban == 'opsi1') {
-                    $opsi[$key]['answer'] = $value->opsi1;
-                } elseif ($value->jawaban == 'opsi2') {
-                    $opsi[$key]['answer'] = $value->opsi2;
-                } elseif ($value->jawaban == 'opsi3') {
-                    $opsi[$key]['answer'] = $value->opsi3;
-                } elseif ($value->jawaban == 'opsi4') {
-                    $opsi[$key]['answer'] = $value->opsi4;
-                }
-            }
+            
+            // return response()->json(['pertanyaans' => $pertanyaans]);
 
-
-        if ($jumlahPertanyaan < 5) {
-
-            foreach ($pertanyaan as $key => $value) {
-                $pertanyaan[$key]['opsi'] = $opsi->where('pertanyaan_id', $value->id);
-            }
-           
-            // return response()->json(['pertanyaan' => $pertanyaan]);
-
-            return view('level1', compact('pertanyaan'));
-        } else {
-
-            foreach ($pertanyaan->random(5) as $key => $value) {
-                $pertanyaan[$key]['opsi'] = $opsi->where('pertanyaan_id', $value->id)->random(5);
-            }
-        }
+            return view('level1', compact('pertanyaans'));
+        // }
 
         
     }
 
+    public function postL1(Request $request){
+       
+        $score = 0;
+       //buat array pertanyaan berdasarka id yang d kirim
+       foreach ($request->all() as $key => $value) {
+           if (strpos($key, 'q-') !== false) {
+               $pertanyaanId[] = $value;
+           }
+       }
+
+         //buat array jawaban berdasarkan p yang d kirim
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'p') !== false) {
+                    $jawaban[] = $value;
+                }
+            }
+
+            // dd ($pertanyaanId[2]);
+
+        foreach ($pertanyaanId as $key => $value) {
+
+            $opsi = Opsi::where('pertanyaan_id', $value)->get();
+
+            foreach ($opsi as $key2 => $value2) {
+                // dd ($value2->jawaban);
+                // dd ($jawaban[$key]);
+                $val = $value2->jawaban;
+                $getVal = $opsi[0]->$val;
+                // dd ($getVal);
+                if ($getVal == $jawaban[$key]) {
+                    $score += 20;
+                }else{
+                    $score += 0;
+                }
+            }
+            
+        }
+
+        return view('score', compact('score'));
+    }
+
     public function level2(Request $request)
     {
+         //pertanyaan with opsi()
+         $pertanyaans = Pertanyaan::with('opsi')->where('level', 2)->get()->random(5);
+
+            
+         // return response()->json(['pertanyaans' => $pertanyaans]);
+
+         return view('level2', compact('pertanyaans'));
+    }
+
+    public function postL2(Request $request){
        
-       return view('level2');
+        $score = 0;
+       //buat array pertanyaan berdasarka id yang d kirim
+       foreach ($request->all() as $key => $value) {
+           if (strpos($key, 'q-') !== false) {
+               $pertanyaanId[] = $value;
+           }
+       }
+
+         //buat array jawaban berdasarkan p yang d kirim
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'p') !== false) {
+                    $jawaban[] = $value;
+                }
+            }
+
+            // dd ($pertanyaanId[2]);
+
+        foreach ($pertanyaanId as $key => $value) {
+
+            $opsi = Opsi::where('pertanyaan_id', $value)->get();
+
+            foreach ($opsi as $key2 => $value2) {
+                // dd ($value2->jawaban);
+                // dd ($jawaban[$key]);
+                $val = $value2->jawaban;
+                $getVal = $opsi[0]->$val;
+                // dd ($getVal);
+                if ($getVal == $jawaban[$key]) {
+                    $score += 20;
+                }else{
+                    $score += 0;
+                }
+            }
+            
+        }
+
+        return view('score', compact('score'));
     }
 
     public function level3(Request $request)
     {
+       //pertanyaan with opsi()
+       $pertanyaans = Pertanyaan::with('opsi')->where('level', 3)->get()->random(5);
+
+            
+       // return response()->json(['pertanyaans' => $pertanyaans]);
+
+       return view('level3', compact('pertanyaans'));
+    }
+
+    public function postL3(Request $request){
        
-       return view('level3');
+        $score = 0;
+       //buat array pertanyaan berdasarka id yang d kirim
+       foreach ($request->all() as $key => $value) {
+           if (strpos($key, 'q-') !== false) {
+               $pertanyaanId[] = $value;
+           }
+       }
+
+         //buat array jawaban berdasarkan p yang d kirim
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'p') !== false) {
+                    $jawaban[] = $value;
+                }
+            }
+
+            // dd ($pertanyaanId[2]);
+
+        foreach ($pertanyaanId as $key => $value) {
+
+            $opsi = Opsi::where('pertanyaan_id', $value)->get();
+
+            foreach ($opsi as $key2 => $value2) {
+                // dd ($value2->jawaban);
+                // dd ($jawaban[$key]);
+                $val = $value2->jawaban;
+                $getVal = $opsi[0]->$val;
+                // dd ($getVal);
+                if ($getVal == $jawaban[$key]) {
+                    $score += 20;
+                }else{
+                    $score += 0;
+                }
+            }
+            
+        }
+
+        return view('score', compact('score'));
     }
 
     public function back(Request $request)

@@ -14,4 +14,12 @@ class Pertanyaan extends Model
         'level',
         'path_image',
     ];
+
+
+    public function opsi()
+    {
+        return $this->hasMany(Opsi::class);
+    }
+
+    
 }
